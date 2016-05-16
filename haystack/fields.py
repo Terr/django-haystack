@@ -127,7 +127,10 @@ class SearchField(object):
                     )
 
             if callable(current_object):
-                values.append(current_object())
+                if hasattr(current_object, 'all'):
+                    values.extend(current_object.all())
+                else:
+                    values.append(current_object())
             else:
                 values.append(current_object)
 
